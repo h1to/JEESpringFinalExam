@@ -15,13 +15,8 @@ import javax.persistence.*;
 public class Role {
     @Id
     @Column(name = "role_id", nullable = false, insertable = false, updatable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long roleId;
 
     @Column(name = "name", nullable = false)
     private String name;
-
-    public Role(String name) {
-        this.name = name;
-    }
 }

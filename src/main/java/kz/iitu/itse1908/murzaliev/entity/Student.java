@@ -18,7 +18,6 @@ public class Student {
 
     @Id
     @Column(name = "student_id", nullable = false, insertable = false, updatable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long studentId;
 
     @NonNull
@@ -48,15 +47,6 @@ public class Student {
     @NonNull
     @Column(name = "gpa")
     private Double gpa;
-
-    public Student(@NonNull User user, @NonNull Degree degree, @NonNull Department department, @NonNull Speciality speciality, @NonNull Long year, @NonNull Double gpa) {
-        this.user = user;
-        this.degree = degree;
-        this.department = department;
-        this.speciality = speciality;
-        this.year = year;
-        this.gpa = gpa;
-    }
 
     @Autowired
     public void setUser(User user) {

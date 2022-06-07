@@ -16,13 +16,8 @@ public class Faculty {
 
     @Id
     @Column(name = "faculty_id", nullable = false, insertable = false, updatable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long facultyId;
 
     @Column(name = "name", nullable = false)
     private String name;
-
-    public Faculty(String name) {
-        this.name = name;
-    }
 }

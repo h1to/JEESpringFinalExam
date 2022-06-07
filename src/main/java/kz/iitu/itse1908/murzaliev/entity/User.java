@@ -18,7 +18,6 @@ public class User {
 
     @Id
     @Column(name = "user_id", nullable = false, insertable = false, updatable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long userId;
 
     @NonNull
@@ -37,13 +36,6 @@ public class User {
     @NonNull
     @Column(name = "block")
     private Boolean block;
-
-    public User(@NonNull Role role, @NonNull String email, @NonNull String password, @NonNull Boolean block) {
-        this.role = role;
-        this.email = email;
-        this.password = password;
-        this.block = block;
-    }
 
     @Autowired
     public void setRole(Role role) {

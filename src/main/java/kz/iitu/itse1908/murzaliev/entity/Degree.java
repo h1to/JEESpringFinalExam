@@ -15,13 +15,8 @@ import javax.persistence.*;
 public class Degree {
     @Id
     @Column(name = "degree_id", nullable = false, insertable = false, updatable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long degreeId;
 
     @Column(name = "name", nullable = false)
     private String name;
-
-    public Degree(String name) {
-        this.name = name;
-    }
 }

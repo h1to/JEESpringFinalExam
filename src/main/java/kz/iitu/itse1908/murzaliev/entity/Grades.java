@@ -16,7 +16,6 @@ public class Grades {
 
     @Id
     @Column(name = "grade_id", nullable = false, insertable = false, updatable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long gradeId;
 
     @Column(name = "week_one")

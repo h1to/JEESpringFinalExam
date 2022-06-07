@@ -19,7 +19,6 @@ public class Speciality {
 
     @Id
     @Column(name = "speciality_id", nullable = false, insertable = false, updatable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long specialityId;
 
     @NonNull
@@ -30,11 +29,6 @@ public class Speciality {
     @ManyToOne
     @JoinColumn(name = "faculty_id")
     private Faculty faculty;
-
-    public Speciality(String name, @NonNull Faculty faculty) {
-        this.name = name;
-        this.faculty = faculty;
-    }
 
     @Autowired
     public void setFaculty(Faculty faculty) {
