@@ -3,6 +3,7 @@ package kz.iitu.itse1908.murzaliev.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
@@ -13,6 +14,16 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Component
 public class Grades {
+
+    @NonNull
+    @ManyToOne
+    @JoinColumn(name = "discipline_id")
+    private Discipline discipline;
+
+    @NonNull
+    @ManyToOne
+    @JoinColumn(name = "student_id")
+    private Student student;
 
     @Id
     @Column(name = "grade_id", nullable = false, insertable = false, updatable = false)
@@ -68,4 +79,8 @@ public class Grades {
 
     @Column(name = "final_grade")
     private Double finalGrade;
+
+    public Grades(Long gradeId) {
+        this.gradeId = gradeId;
+    }
 }

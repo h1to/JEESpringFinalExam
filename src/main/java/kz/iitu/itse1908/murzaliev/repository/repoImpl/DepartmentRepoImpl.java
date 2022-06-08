@@ -4,10 +4,14 @@ import kz.iitu.itse1908.murzaliev.entity.Department;
 import kz.iitu.itse1908.murzaliev.extractData.DepartmentRowMapper;
 import kz.iitu.itse1908.murzaliev.repository.repoInterface.DepartmentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Lazy
+@Repository
 public class DepartmentRepoImpl implements DepartmentRepo {
 
     private JdbcTemplate jdbcTemplate;
@@ -19,8 +23,7 @@ public class DepartmentRepoImpl implements DepartmentRepo {
 
     @Override
     public int save(Department department) {
-        return jdbcTemplate.update("insert into department (department_id,name) values (?,?)",
-                department.getDepartmentId(),
+        return jdbcTemplate.update("insert into department (name) values (?)",
                 department.getName());
     }
 
@@ -37,8 +40,13 @@ public class DepartmentRepoImpl implements DepartmentRepo {
     }
 
     @Override
-    public Department findById(Long id) {
-        return (Department) jdbcTemplate.query("select*from department where department_id=?", new Object[]{id}, new DepartmentRowMapper()).get(0);
+    public Department findById(Long id) throws IndexOutOfBoundsException {
+        try {
+            return (Department) jdbcTemplate.query("select*from department where department_id=?", new Object[]{id}, new DepartmentRowMapper()).get(0);
+        } catch (Exception e) {
+            System.out.println(e);
+            return new Department();
+        }
     }
 
     @Override

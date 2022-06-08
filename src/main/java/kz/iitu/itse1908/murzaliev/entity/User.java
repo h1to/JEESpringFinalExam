@@ -41,4 +41,15 @@ public class User {
     public void setRole(Role role) {
         this.role = role;
     }
+
+    public User(Long userId) {
+        this.userId = userId;
+    }
+
+    public User(@NonNull Role role, @NonNull String email, @NonNull String password, @NonNull Boolean block) {
+        this.role = role;
+        this.email = email;
+        this.password = password;
+        this.block = block;
+    }
 }

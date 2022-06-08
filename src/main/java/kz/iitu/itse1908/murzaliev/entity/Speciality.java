@@ -5,11 +5,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 
+@DependsOn("faculty")
 @Data
 @Entity
 @NoArgsConstructor
@@ -33,5 +34,9 @@ public class Speciality {
     @Autowired
     public void setFaculty(Faculty faculty) {
         this.faculty = faculty;
+    }
+
+    public Speciality(Long specialityId) {
+        this.specialityId = specialityId;
     }
 }

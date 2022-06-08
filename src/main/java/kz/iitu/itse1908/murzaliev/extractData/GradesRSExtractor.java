@@ -1,6 +1,8 @@
 package kz.iitu.itse1908.murzaliev.extractData;
 
+import kz.iitu.itse1908.murzaliev.entity.Discipline;
 import kz.iitu.itse1908.murzaliev.entity.Grades;
+import kz.iitu.itse1908.murzaliev.entity.Student;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
@@ -11,6 +13,8 @@ public class GradesRSExtractor implements ResultSetExtractor {
     @Override
     public Object extractData(ResultSet rs) throws SQLException, DataAccessException {
         Grades grades = new Grades();
+        grades.setDiscipline(new Discipline(rs.getLong("discipline_id")));
+        grades.setStudent(new Student(rs.getLong("student_id")));
         grades.setGradeId(rs.getLong("grade_id"));
         grades.setEndterm(rs.getDouble("endterm"));
         grades.setExam(rs.getDouble("exam"));

@@ -19,4 +19,10 @@ public class Role {
 
     @Column(name = "name", nullable = false)
     private String name;
+
+    public Role(Long roleId) {
+        this.roleId = roleId;
+    }
+
+
 }

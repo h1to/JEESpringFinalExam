@@ -20,4 +20,8 @@ public class Faculty {
 
     @Column(name = "name", nullable = false)
     private String name;
+
+    public Faculty(Long facultyId) {
+        this.facultyId = facultyId;
+    }
 }

@@ -17,7 +17,7 @@ import javax.persistence.*;
 public class Teacher {
 
     @Id
-    @Column(name = "teacher_id", nullable = false, insertable = false, updatable = false)
+    @Column(name = "teacher_id", nullable = false, updatable = false)
     private Long teacherId;
 
     @OneToOne
@@ -37,5 +37,9 @@ public class Teacher {
     @Autowired
     public void setFaculty(Faculty faculty) {
         this.faculty = faculty;
+    }
+
+    public Teacher(Long teacherId) {
+        this.teacherId = teacherId;
     }
 }

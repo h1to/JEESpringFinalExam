@@ -5,10 +5,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 
+@DependsOn("user")
 @Data
 @Entity
 @NoArgsConstructor
@@ -66,5 +68,9 @@ public class Student {
     @Autowired
     public void setSpeciality(Speciality speciality) {
         this.speciality = speciality;
+    }
+
+    public Student(Long studentId) {
+        this.studentId = studentId;
     }
 }

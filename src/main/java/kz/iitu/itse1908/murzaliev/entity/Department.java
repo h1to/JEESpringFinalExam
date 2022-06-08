@@ -20,4 +20,8 @@ public class Department {
 
     @Column(name = "name", nullable = false)
     private String name;
+
+    public Department(Long departmentId) {
+        this.departmentId = departmentId;
+    }
 }

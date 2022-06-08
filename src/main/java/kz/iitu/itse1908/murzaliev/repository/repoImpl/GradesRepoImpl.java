@@ -5,9 +5,11 @@ import kz.iitu.itse1908.murzaliev.extractData.GradesRowMapper;
 import kz.iitu.itse1908.murzaliev.repository.repoInterface.GradesRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class GradesRepoImpl implements GradesRepo {
 
     private JdbcTemplate jdbcTemplate;
@@ -20,7 +22,6 @@ public class GradesRepoImpl implements GradesRepo {
     @Override
     public int save(Grades grades) {
         return jdbcTemplate.update("insert into grades (" +
-                "grade_id," +
                 "endterm," +
                 "exam," +
                 "final_grade," +
@@ -37,7 +38,9 @@ public class GradesRepoImpl implements GradesRepo {
                 "week_eleven," +
                 "week_twelve," +
                 "week_thirteen," +
-                "week_fourteen) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+                "week_fourteen," +
+                "discipline_id," +
+                "student_id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
                 grades.getGradeId(),
                 grades.getEndterm(),
                 grades.getExam(),
@@ -55,14 +58,15 @@ public class GradesRepoImpl implements GradesRepo {
                 grades.getWeek11(),
                 grades.getWeek12(),
                 grades.getWeek13(),
-                grades.getWeek14());
+                grades.getWeek14(),
+                grades.getDiscipline().getDiscipline_id(),
+                grades.getStudent().getStudentId());
     }
 
     @Override
     public int update(Grades grades) {
         return jdbcTemplate.update("update grades " +
-                "set grade_id=?, endterm=?, exam=?, final_grade=?, midterm=?, week_one=?, week_two=?, week_three=?, week_four=?, week_five=?, week_six=?, week_seven=?, week_nine=?, week_ten=?, week_eleven=?, week_twelve=?, week_thirteen=?, week_fourteen=?",
-                grades.getGradeId(),
+                "set endterm=?, exam=?, final_grade=?, midterm=?, week_one=?, week_two=?, week_three=?, week_four=?, week_five=?, week_six=?, week_seven=?, week_nine=?, week_ten=?, week_eleven=?, week_twelve=?, week_thirteen=?, week_fourteen=?",
                 grades.getEndterm(),
                 grades.getExam(),
                 grades.getFinalGrade(),
@@ -88,8 +92,14 @@ public class GradesRepoImpl implements GradesRepo {
     }
 
     @Override
-    public Grades findById(Long id) {
-        return (Grades) jdbcTemplate.query("select * from grades where grade_id=?", new Object[]{id}, new GradesRowMapper()).get(0);
+    public Grades findById(Long id) throws IndexOutOfBoundsException {
+        try {
+            return (Grades) jdbcTemplate.query("select * from grades where grade_id=?", new Object[]{id}, new GradesRowMapper()).get(0);
+        } catch (Exception e) {
+            System.out.println(e);
+            return new Grades();
+        }
+
     }
 
     @Override

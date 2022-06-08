@@ -14,9 +14,17 @@ import javax.persistence.*;
 @Component
 public class Degree {
     @Id
-    @Column(name = "degree_id", nullable = false, insertable = false, updatable = false)
+    @Column(name = "degree_id", nullable = false, updatable = false)
     private Long degreeId;
 
     @Column(name = "name", nullable = false)
     private String name;
+
+    public Degree(Long degreeId) {
+        this.degreeId = degreeId;
+    }
+
+    public Degree(String name) {
+        this.name = name;
+    }
 }
