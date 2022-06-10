@@ -1,0 +1,27 @@
+#server:
+#  port: 9000
+#
+#spring:
+#  kafka:
+#    consumer:
+#      bootstrap-servers: localhost:9092
+#      group-id: group_id
+#      auto-offset-reset: earliest
+#      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#    producer:
+#      bootstrap-servers: localhost:9092
+#      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+#      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: 40925201648-g90dt97753jimq6ekn3k4l484h3e75e2.apps.googleusercontent.com
+            clientSecret: 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
+            scope:
+              - email
+              - profile

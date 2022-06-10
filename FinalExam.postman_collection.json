@@ -1,0 +1,99 @@
+{
+	"info": {
+		"_postman_id": "bd6057d9-2feb-4fee-abdd-82d7f7200d8d",
+		"name": "FinalExam",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18362209"
+	},
+	"item": [
+		{
+			"name": "getStudentsFromDiscipline",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://localhost:8080/teacher/getStudents?id=13",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"teacher",
+						"getStudents"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "13"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getStudentGrades",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/teacher/studentGrades?idS=1&idD=12",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"teacher",
+						"studentGrades"
+					],
+					"query": [
+						{
+							"key": "idS",
+							"value": "1"
+						},
+						{
+							"key": "idD",
+							"value": "12"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Grade",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"discipline\":12,\"student\":1,\"gradeId\":null,\"week1\":80,\"week2\":90,\"week3\":95,\"week4\":100,\"week5\":null,\"week6\":null,\"week7\":null,\"midterm\":null,\"week9\":null,\"week10\":null,\"week11\":null,\"week12\":null,\"week13\":null,\"week14\":null,\"endterm\":null,\"exam\":null,\"finalGrade\":null}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/teacher/grade",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"teacher",
+						"grade"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
