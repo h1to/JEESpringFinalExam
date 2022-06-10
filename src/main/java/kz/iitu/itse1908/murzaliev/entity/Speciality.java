@@ -39,4 +39,9 @@ public class Speciality {
     public Speciality(Long specialityId) {
         this.specialityId = specialityId;
     }
+
+    public Speciality(@NonNull String name, @NonNull Faculty faculty) {
+        this.name = name;
+        this.faculty = faculty;
+    }
 }

@@ -83,4 +83,9 @@ public class Grades {
     public Grades(Long gradeId) {
         this.gradeId = gradeId;
     }
+
+    public Grades(@NonNull Discipline discipline, @NonNull Student student) {
+        this.discipline = discipline;
+        this.student = student;
+    }
 }

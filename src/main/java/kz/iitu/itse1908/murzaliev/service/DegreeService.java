@@ -11,8 +11,13 @@ import java.util.Optional;
 
 @Service
 public class DegreeService {
-    @Autowired
+
     private DegreeRepoImpl degreeRepo;
+
+    @Autowired
+    public void setDegreeRepo(DegreeRepoImpl degreeRepo) {
+        this.degreeRepo = degreeRepo;
+    }
 
     public int addDegree(Degree degree) {
         List<Degree> degreeList = degreeRepo.findAll();

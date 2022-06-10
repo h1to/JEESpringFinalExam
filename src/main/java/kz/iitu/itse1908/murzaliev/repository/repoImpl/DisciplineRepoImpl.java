@@ -4,6 +4,7 @@ import kz.iitu.itse1908.murzaliev.entity.Discipline;
 import kz.iitu.itse1908.murzaliev.entity.Student;
 import kz.iitu.itse1908.murzaliev.entity.Teacher;
 import kz.iitu.itse1908.murzaliev.repository.repoInterface.DisciplineRepo;
+import kz.iitu.itse1908.murzaliev.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -18,6 +19,13 @@ public class DisciplineRepoImpl implements DisciplineRepo {
 
     private JdbcTemplate jdbcTemplate;
 
+    private StudentService studentService;
+
+    @Autowired
+    public void setStudentService(StudentService studentService) {
+        this.studentService = studentService;
+    }
+
     @Autowired
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -25,19 +33,17 @@ public class DisciplineRepoImpl implements DisciplineRepo {
 
     @Override
     public int save(Discipline discipline) {
-        int result = jdbcTemplate.update("insert into discipline (name) values (?); set @discipline_id = LAST_INSERT_ID();", discipline.getName());
+        int result = jdbcTemplate.update("insert into discipline (name) values (?);", discipline.getName());
+        List<Discipline> disciplines = findAll();
+        discipline.setDiscipline_id(disciplines.get(disciplines.size()-1).getDiscipline_id());
         List<Teacher> teachers = discipline.getTeacher();
         if (!teachers.isEmpty()) {
-            for (int i = 0; i < teachers.size(); i++) {
-                jdbcTemplate.update("insert into discipline_teacher values (@discipline_id,?)", teachers.get(i).getTeacherId());
-            }
+            addTeachers(teachers,discipline);
         }
 
         List<Student> students = discipline.getStudent();
         if (!students.isEmpty()) {
-            for (int i = 0; i < students.size(); i++) {
-                jdbcTemplate.update("insert into discipline_student values (@discipline_id,?)", students.get(i).getStudentId());
-            }
+            addStudents(students,discipline);
         }
         return result;
     }
@@ -79,6 +85,8 @@ public class DisciplineRepoImpl implements DisciplineRepo {
         });
     }
 
+
+
     @Override
     public int[] deleteTeachers(List<Teacher> teachers, Discipline discipline) {
         return jdbcTemplate.batchUpdate("delete from discipline_teacher where discipline_id=? and teacher_id=?", new BatchPreparedStatementSetter() {
@@ -112,6 +120,16 @@ public class DisciplineRepoImpl implements DisciplineRepo {
     }
 
     @Override
+    public int deleteDisciplineFromDS(Long id) {
+        return jdbcTemplate.update("delete from discipline_student where discipline_id=?", id);
+    }
+
+    @Override
+    public int deleteDisciplineFromDT(Long id) {
+        return jdbcTemplate.update("delete from discipline_teacher where discipline_id=?", id);
+    }
+
+    @Override
     public int delete(Long id) {
         jdbcTemplate.update("delete from discipline_student where discipline_id=?", id);
         jdbcTemplate.update("delete from discipline_teacher where discipline_id=?", id);
@@ -125,7 +143,11 @@ public class DisciplineRepoImpl implements DisciplineRepo {
 
     @Override
     public List<Student> getStudents(Long id) {
-        return jdbcTemplate.query("select student_id from discipline_student where discipline_id=?", new Object[]{id}, (rs, rowNum) -> new Student(rs.getLong(1)));
+        List<Student> studentIds = jdbcTemplate.query("select student_id from discipline_student where discipline_id=?", new Object[]{id}, (rs, rowNum) -> new Student(rs.getLong(1)));
+        studentIds.forEach(s -> {
+            s = studentService.getStudentById(s.getStudentId());
+        });
+        return studentIds;
     }
 
     @Override

@@ -34,14 +34,14 @@ public class DegreeRepoImpl implements DegreeRepo {
 
     @Override
     public int delete(Long id) {
-        return jdbcTemplate.update("delete from degree where degree_id=?", id);
+        return jdbcTemplate.update("delete from Degree where degree_id=?", id);
     }
 
     @Override
     public Degree findById(Long id) throws IndexOutOfBoundsException {
         try {
             return (Degree)jdbcTemplate.query(
-                    "select * from degree where degree_id=?",
+                    "select * from Degree where degree_id=?",
                     new Object[] {id},
                     new DegreeRowMapper()).get(0);
         } catch (Exception e) {
@@ -54,7 +54,7 @@ public class DegreeRepoImpl implements DegreeRepo {
     @Override
     public List<Degree> findAll() {
         return jdbcTemplate.query(
-                "select * from degree",
+                "select * from Degree",
                 new DegreeRowMapper());
     }
 }

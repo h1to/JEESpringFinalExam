@@ -38,8 +38,18 @@ public class Discipline {
         this.discipline_id = discipline_id;
     }
 
+    public Discipline(String name) {
+        this.name = name;
+    }
+
     public Discipline(Long discipline_id, String name) {
         this.discipline_id = discipline_id;
         this.name = name;
+    }
+
+    public Discipline(String name, @NonNull List<Student> student, @NonNull List<Teacher> teacher) {
+        this.name = name;
+        this.student = student;
+        this.teacher = teacher;
     }
 }

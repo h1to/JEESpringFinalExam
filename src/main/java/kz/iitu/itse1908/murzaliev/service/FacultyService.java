@@ -1,5 +1,6 @@
 package kz.iitu.itse1908.murzaliev.service;
 
+import kz.iitu.itse1908.murzaliev.entity.Department;
 import kz.iitu.itse1908.murzaliev.entity.Faculty;
 import kz.iitu.itse1908.murzaliev.repository.repoImpl.FacultyRepoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,19 @@ public class FacultyService {
         else {
             return facultyRepo.update(faculty);
         }
+    }
+
+    public boolean facultyExists (Long id) {
+        boolean result = false;
+        List<Faculty> faculties = facultyRepo.findAll();
+        Optional<Faculty> optionalDepartment = faculties.stream().filter(d -> d.getFacultyId() == id).findFirst();
+        if (optionalDepartment.isPresent()) {
+            result = true;
+        }
+        else {
+            result = false;
+        }
+        return result;
     }
 
     public int deleteFaculty(Long id) {

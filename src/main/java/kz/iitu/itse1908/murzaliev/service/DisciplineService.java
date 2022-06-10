@@ -4,17 +4,26 @@ import kz.iitu.itse1908.murzaliev.entity.Discipline;
 import kz.iitu.itse1908.murzaliev.entity.Student;
 import kz.iitu.itse1908.murzaliev.entity.Teacher;
 import kz.iitu.itse1908.murzaliev.repository.repoImpl.DisciplineRepoImpl;
+import kz.iitu.itse1908.murzaliev.utility.QuickSort;
 import org.hibernate.tool.schema.internal.StandardUniqueKeyExporter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.OptionalInt;
 
 @Service
 public class DisciplineService {
     
     private DisciplineRepoImpl disciplineRepo;
+
+    private QuickSort quickSort;
+
+    @Autowired
+    public void setQuickSort(QuickSort quickSort) {
+        this.quickSort = quickSort;
+    }
 
     @Autowired
     public void setDisciplineRepo(DisciplineRepoImpl disciplineRepo) {
@@ -54,6 +63,41 @@ public class DisciplineService {
         }
     }
 
+    public int deleteDisciplineFromDS(Long id) {
+        List<Discipline> disciplines = disciplineRepo.findAll();
+        Optional<Discipline> optionalDiscipline = disciplines.stream().filter(d -> d.getDiscipline_id() == id).findFirst();
+        if (optionalDiscipline.isPresent()) {
+            return disciplineRepo.deleteDisciplineFromDS(id);
+        }
+        else {
+            return 11;
+        }
+    }
+
+    public int deleteDisciplineFromDT(Long id) {
+        List<Discipline> disciplines = disciplineRepo.findAll();
+        Optional<Discipline> optionalDiscipline = disciplines.stream().filter(d -> d.getDiscipline_id() == id).findFirst();
+        if (optionalDiscipline.isPresent()) {
+            return disciplineRepo.deleteDisciplineFromDT(id);
+        }
+        else {
+            return 11;
+        }
+    }
+
+    public boolean disciplineExists (Long id) {
+        boolean result = false;
+
+        Optional<Discipline> discipline = disciplineRepo.findAll().stream().filter(d -> d.getDiscipline_id() == id).findFirst();
+        if (discipline.isPresent()) {
+            result = true;
+        }
+        else {
+            result = false;
+        }
+        return result;
+    }
+
     public List<Discipline> getDesciplineList () {
         List<Discipline> desciplineList = disciplineRepo.findAll();
         return desciplineList;
@@ -71,18 +115,48 @@ public class DisciplineService {
     }
 
     public List<Student> getStudents (Long id) {
-        return disciplineRepo.getStudents(id);
+        List<Student> students = disciplineRepo.getStudents(id);
+        //quickSort.quickSortStudent(students,students.get(0).getStudentId().intValue(),students.get(students.size()-1).getStudentId().intValue());
+        return students;
     }
 
     public List<Teacher> getTeachers (Long id) {
-        return disciplineRepo.getTeachers(id);
+        List<Teacher> teachers = disciplineRepo.getTeachers(id);
+        quickSort.quickSortTeacher(teachers,teachers.get(0).getTeacherId().intValue(),teachers.get(teachers.size()-1).getTeacherId().intValue());
+        return teachers;
     }
 
     public int[] addStudents (List<Student> students, Discipline discipline) {
+        List<Student> studentsInDB = disciplineRepo.getStudents(discipline.getDiscipline_id());
+        students.forEach(s -> {
+            if (studentsInDB.contains(s)) {
+                System.out.println("Student with id=" + s.getStudentId() + " already exists in discipline");
+                students.remove(s);
+            }
+        });
         return disciplineRepo.addStudents(students, discipline);
     }
 
     public int[] addTeachers (List<Teacher> teachers, Discipline discipline) {
+        List<Teacher> teachersInDB = disciplineRepo.getTeachers(discipline.getDiscipline_id());
+        teachers.forEach(t -> {
+            if (teachersInDB.contains(t)) {
+                System.out.println("Discipline already contains teacher with id=" + t.getTeacherId());
+                teachers.remove(t);
+            }
+        });
         return disciplineRepo.addTeachers(teachers, discipline);
+    }
+
+    public List<Discipline> getDByStudent (Long studentId) {
+        List<Discipline> disciplines = getDesciplineList();
+        for (int i = 0; i < disciplines.size(); i++) {
+            List<Student> students = disciplines.get(i).getStudent();
+            Optional<Student> student = students.stream().filter(s -> s.getStudentId() == studentId).findFirst();
+            if (student.isEmpty()) {
+                disciplines.remove(disciplines.get(i));
+            }
+        }
+        return disciplines;
     }
 }

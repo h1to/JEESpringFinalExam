@@ -18,6 +18,7 @@ public class UserRSExtractor implements ResultSetExtractor {
         user.setEmail(rs.getString(3));
         user.setPassword(rs.getString(4));
         user.setBlock(rs.getBoolean(5));
+        user.setProviderFromDB(rs.getString(6));
         return user;
     }
 }

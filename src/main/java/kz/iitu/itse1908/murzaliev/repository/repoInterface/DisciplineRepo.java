@@ -16,6 +16,10 @@ public interface DisciplineRepo {
     int[] addStudents(List<Student> students, Discipline discipline);
     int[] deleteTeachers(List<Teacher> teachers, Discipline discipline);
     int[] deleteStudents(List<Student> students, Discipline discipline);
+
+    int deleteDisciplineFromDS(Long id);
+    int deleteDisciplineFromDT(Long id);
+
     List<Student> getStudents(Long id);
     List<Teacher> getTeachers(Long id);
 }

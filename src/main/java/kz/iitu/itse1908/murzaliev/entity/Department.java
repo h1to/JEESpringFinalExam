@@ -24,4 +24,8 @@ public class Department {
     public Department(Long departmentId) {
         this.departmentId = departmentId;
     }
+
+    public Department(String name) {
+        this.name = name;
+    }
 }

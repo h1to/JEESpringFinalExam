@@ -42,4 +42,10 @@ public class Teacher {
     public Teacher(Long teacherId) {
         this.teacherId = teacherId;
     }
+
+    public Teacher(@NonNull User user, @NonNull Faculty faculty, @NonNull String name) {
+        this.user = user;
+        this.faculty = faculty;
+        this.name = name;
+    }
 }

@@ -56,8 +56,8 @@ public class Student {
     }
 
     @Autowired
-    public void setDegree(Degree degree) {
-        this.degree = degree;
+    public void setDegree(Degree student) {
+        this.degree = student;
     }
 
     @Autowired
@@ -72,5 +72,14 @@ public class Student {
 
     public Student(Long studentId) {
         this.studentId = studentId;
+    }
+
+    public Student(@NonNull User user, @NonNull Degree degree, @NonNull Department department, @NonNull Speciality speciality, @NonNull Long year, @NonNull Double gpa) {
+        this.user = user;
+        this.degree = degree;
+        this.department = department;
+        this.speciality = speciality;
+        this.year = year;
+        this.gpa = gpa;
     }
 }

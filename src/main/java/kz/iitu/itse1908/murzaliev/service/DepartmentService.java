@@ -43,6 +43,19 @@ public class DepartmentService {
         }
     }
 
+    public boolean departmentExists (Long id) {
+        boolean result = false;
+        List<Department> departmentList = departmentRepo.findAll();
+        Optional<Department> optionalDepartment = departmentList.stream().filter(d -> d.getDepartmentId() == id).findFirst();
+        if (optionalDepartment.isPresent()) {
+            result = true;
+        }
+        else {
+            result = false;
+        }
+        return result;
+    }
+
     public int deleteDepartment(Long id) {
         List<Department> DepartmentList = departmentRepo.findAll();
         Optional<Department> optionalDepartment = DepartmentList.stream().filter(d -> d.getDepartmentId() == id).findFirst();

@@ -37,6 +37,10 @@ public class User {
     @Column(name = "block")
     private Boolean block;
 
+    @NonNull
+    @Column(name = "provider")
+    private Provider provider;
+
     @Autowired
     public void setRole(Role role) {
         this.role = role;
@@ -51,5 +55,18 @@ public class User {
         this.email = email;
         this.password = password;
         this.block = block;
+    }
+
+    public void setProviderFromDB(String strProvider) {
+        if (strProvider.equals("LOCAL")) {
+            this.provider = Provider.LOCAL;
+        }
+        else {
+            this.provider = Provider.GOOGLE;
+        }
+    }
+
+    public enum Provider {
+        LOCAL, GOOGLE
     }
 }

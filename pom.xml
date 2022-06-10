@@ -18,12 +18,6 @@
    </properties>
    <dependencies>
       <dependency>
-         <groupId>org.aspectj</groupId>
-         <artifactId>aspectjweaver</artifactId>
-         <version>1.9.9.1</version>
-         <scope>runtime</scope>
-      </dependency>
-      <dependency>
          <groupId>org.springframework.boot</groupId>
          <artifactId>spring-boot-starter-validation</artifactId>
       </dependency>
@@ -40,6 +34,15 @@
       <dependency>
          <groupId>io.springfox</groupId>
          <artifactId>springfox-swagger-ui</artifactId>
+         <version>3.0.0</version>
+      </dependency>
+      <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-data-rest</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>nz.net.ultraq.thymeleaf</groupId>
+         <artifactId>thymeleaf-layout-dialect</artifactId>
          <version>3.0.0</version>
       </dependency>
       <dependency>
@@ -63,6 +66,13 @@
          <groupId>org.springframework.boot</groupId>
          <artifactId>spring-boot-starter-thymeleaf</artifactId>
       </dependency>
+
+      <dependency>
+         <groupId>junit</groupId>
+         <artifactId>junit</artifactId>
+         <version>4.4</version>
+         <scope>test</scope>
+      </dependency>
       <dependency>
          <groupId>org.springframework.boot</groupId>
          <artifactId>spring-boot-starter-web</artifactId>
@@ -71,7 +81,10 @@
          <groupId>org.thymeleaf.extras</groupId>
          <artifactId>thymeleaf-extras-springsecurity5</artifactId>
       </dependency>
-
+      <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-oauth2-client</artifactId>
+      </dependency>
       <dependency>
          <groupId>org.springframework.boot</groupId>
          <artifactId>spring-boot-devtools</artifactId>
@@ -106,6 +119,11 @@
       <dependency>
          <groupId>org.springframework.boot</groupId>
          <artifactId>spring-boot-starter-web-services</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.springframework</groupId>
+         <artifactId>spring-context</artifactId>
+         <version>5.3.3</version>
       </dependency>
    </dependencies>
 

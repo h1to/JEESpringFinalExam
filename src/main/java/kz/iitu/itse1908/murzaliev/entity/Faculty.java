@@ -24,4 +24,8 @@ public class Faculty {
     public Faculty(Long facultyId) {
         this.facultyId = facultyId;
     }
+
+    public Faculty(String name) {
+        this.name = name;
+    }
 }

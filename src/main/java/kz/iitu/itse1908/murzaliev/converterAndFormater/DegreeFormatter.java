@@ -13,10 +13,10 @@ public class DegreeFormatter implements Formatter<Degree> {
         if (text != null) {
             String[] attr =text.split(",");
             if (attr.length == 2) {
-                Degree degree = new Degree();
-                degree.setDegreeId(Long.valueOf(attr[0]));
-                degree.setName(attr[1]);
-                return degree;
+                Degree student = new Degree();
+                student.setDegreeId(Long.valueOf(attr[0]));
+                student.setName(attr[1]);
+                return student;
             }
             else {
                 return null;

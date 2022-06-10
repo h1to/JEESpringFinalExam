@@ -41,7 +41,6 @@ public class GradesRepoImpl implements GradesRepo {
                 "week_fourteen," +
                 "discipline_id," +
                 "student_id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-                grades.getGradeId(),
                 grades.getEndterm(),
                 grades.getExam(),
                 grades.getFinalGrade(),
@@ -92,18 +91,28 @@ public class GradesRepoImpl implements GradesRepo {
     }
 
     @Override
-    public Grades findById(Long id) throws IndexOutOfBoundsException {
+    public Grades findById(Long student_id, Long discipline_id) throws IndexOutOfBoundsException {
         try {
-            return (Grades) jdbcTemplate.query("select * from grades where grade_id=?", new Object[]{id}, new GradesRowMapper()).get(0);
+            return (Grades) jdbcTemplate.query("select * from grades where student_id=? and discipline_id=?", new Object[]{student_id,discipline_id}, new GradesRowMapper()).get(0);
         } catch (Exception e) {
             System.out.println(e);
             return new Grades();
         }
+    }
 
+    @Override
+    public List<Grades> findByDiscipline(Long discipline_id) {
+        return jdbcTemplate.query("select*from grades where discipline_id=?", new Object[]{discipline_id}, new GradesRowMapper());
+    }
+
+    @Override
+    public List<Grades> findByStudent(Long studentId) {
+        return jdbcTemplate.query("select*from grades where student_id=?", new Object[]{studentId}, new GradesRowMapper());
     }
 
     @Override
     public List<Grades> findAll() {
         return jdbcTemplate.query("select * from grades", new GradesRowMapper());
     }
+
 }
