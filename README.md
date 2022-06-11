@@ -20,7 +20,7 @@
 8) - [x] Add at least 2 configuration classes;<details><summary>Configuration classes</summary><p>AppConfig.java</p><p>MvcConfig.java</p><p>SwaggerConfig.java</p><p>WebSecurityConfig.java</p></details>
 9) - [x] Add AOP configuration. Use AspectJ annotation style.
 
-![img.png](img.png)
+![img.png](imagesForReadme/img.png)
 10) - [x] Use annotations; <details><summary>Annotations</summary><p>@Before</p><p>@Pointcut</p><p>@After</p><p>@Aspect</p></deatils>
 11) - [x] Add real service/business logic in AOP code; 
 - After adding list of students to the discipline the advice creates and adds to the database corresponding list of grades.
@@ -36,7 +36,7 @@
 
 13) - [x] Use batch operations;
 
-![img_1.png](img_1.png)
+![img_1.png](imagesForReadme/img_1.png)
 
 14) - [x] Implement a Custom Converter;
 
@@ -68,7 +68,7 @@ with attributes; <details><summary>Attributes</summary><p>fixedDelay</p><p>fixed
 
 18) - [x] .Parameterizing the Schedule. Parameters should be in application.props file;
 
-![img_2.png](img_2.png)
+![img_2.png](imagesForReadme/img_2.png)
 
 19) - [x] **Run Tasks in Parallel;**
 
@@ -94,31 +94,31 @@ with attributes; <details><summary>Attributes</summary><p>fixedDelay</p><p>fixed
 </dependency>
 ````
 
-![img_13.png](img_13.png)
+![img_13.png](imagesForReadme/img_13.png)
 
 24) - [x] Use Spring @ResponseStatus to Set HTTP Status Code. 
 Use SpringResponseEntity to Manipulate the HTTP Response;
 
-![img_4.png](img_4.png)
+![img_4.png](imagesForReadme/img_4.png)
 
 25) - [ ] Add REST Pagination support;
 26) - [x] Add Upload and Download file methods;
 
-![img_5.png](img_5.png)
+![img_5.png](imagesForReadme/img_5.png)
 
-![img_6.png](img_6.png)
+![img_6.png](imagesForReadme/img_6.png)
 
 27) - [x] Add JUnit test with at least 80% code coverage;
 28) - [x] Write integration test for controller classes;
 
-![img_7.png](img_7.png)
+![img_7.png](imagesForReadme/img_7.png)
 
 29) - [ ] Write JMS service;
 30) - [x] Add JUnit test with at least 80% code coverage;
 31) - [x] Use OAuth2 and JWT;
 
 OAuth2 with Google as provider.
-![img_8.png](img_8.png)
+![img_8.png](imagesForReadme/img_8.png)
 
 32) - [x] DO NOT USE in memory authentication;
 33) - [ ] Prevent Brute Force Authentication Attempts with Spring Security
@@ -129,16 +129,16 @@ OAuth2 with Google as provider.
 38) - [x] Write CURL in README.md for your ALL endpoints, or upload inproject folder POSTMAN collections
 
 - Getting students by discipline for teacher
-![img_9.png](img_9.png)
+![img_9.png](imagesForReadme/img_9.png)
 
 - Accessing teachers' controller
-![img_10.png](img_10.png)
+![img_10.png](imagesForReadme/img_10.png)
 
 - Getting student's grades
-![img_11.png](img_11.png)
+![img_11.png](imagesForReadme/img_11.png)
 
 - Grading student
-![img_12.png](img_12.png)
+![img_12.png](imagesForReadme/img_12.png)
 
 Error codes:
 
