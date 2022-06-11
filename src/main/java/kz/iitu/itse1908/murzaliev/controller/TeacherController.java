@@ -147,7 +147,7 @@ public class TeacherController {
     public ResponseEntity<List<Student>> getStudents (@RequestParam("id") Long disciplineId) {
         if (isAdmin() || isTeacher()) {
             //Discipline discipline = teachersDiscipline();
-            return ResponseEntity.ok(disciplineService.getStudents(disciplineId));
+            return ResponseEntity.ok(disciplineService.getStudentsByD(disciplineId));
         }
         else {
             return ResponseEntity.ok(new ArrayList<>());

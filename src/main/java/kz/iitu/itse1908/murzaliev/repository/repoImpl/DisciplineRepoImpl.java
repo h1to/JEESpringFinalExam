@@ -19,11 +19,11 @@ public class DisciplineRepoImpl implements DisciplineRepo {
 
     private JdbcTemplate jdbcTemplate;
 
-    private StudentService studentService;
+    private StudentRepoImpl studentRepo;
 
     @Autowired
-    public void setStudentService(StudentService studentService) {
-        this.studentService = studentService;
+    public void setStudentRepo(StudentRepoImpl studentRepo) {
+        this.studentRepo = studentRepo;
     }
 
     @Autowired
@@ -142,10 +142,10 @@ public class DisciplineRepoImpl implements DisciplineRepo {
     }
 
     @Override
-    public List<Student> getStudents(Long id) {
+    public List<Student> getStudentsByD(Long id) {
         List<Student> studentIds = jdbcTemplate.query("select student_id from discipline_student where discipline_id=?", new Object[]{id}, (rs, rowNum) -> new Student(rs.getLong(1)));
         studentIds.forEach(s -> {
-            s = studentService.getStudentById(s.getStudentId());
+            s = studentRepo.findById(s.getStudentId());
         });
         return studentIds;
     }

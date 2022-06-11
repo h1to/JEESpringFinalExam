@@ -114,8 +114,8 @@ public class DisciplineService {
         }
     }
 
-    public List<Student> getStudents (Long id) {
-        List<Student> students = disciplineRepo.getStudents(id);
+    public List<Student> getStudentsByD (Long idD) {
+        List<Student> students = disciplineRepo.getStudentsByD(idD);
         //quickSort.quickSortStudent(students,students.get(0).getStudentId().intValue(),students.get(students.size()-1).getStudentId().intValue());
         return students;
     }
@@ -127,7 +127,7 @@ public class DisciplineService {
     }
 
     public int[] addStudents (List<Student> students, Discipline discipline) {
-        List<Student> studentsInDB = disciplineRepo.getStudents(discipline.getDiscipline_id());
+        List<Student> studentsInDB = disciplineRepo.getStudentsByD(discipline.getDiscipline_id());
         students.forEach(s -> {
             if (studentsInDB.contains(s)) {
                 System.out.println("Student with id=" + s.getStudentId() + " already exists in discipline");

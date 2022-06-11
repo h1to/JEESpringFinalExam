@@ -20,6 +20,6 @@ public interface DisciplineRepo {
     int deleteDisciplineFromDS(Long id);
     int deleteDisciplineFromDT(Long id);
 
-    List<Student> getStudents(Long id);
+    List<Student> getStudentsByD(Long id);
     List<Teacher> getTeachers(Long id);
 }

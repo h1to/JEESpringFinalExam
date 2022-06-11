@@ -3,6 +3,7 @@ package kz.iitu.itse1908.murzaliev.service;
 import kz.iitu.itse1908.murzaliev.entity.Grades;
 import kz.iitu.itse1908.murzaliev.entity.Student;
 import kz.iitu.itse1908.murzaliev.entity.User;
+import kz.iitu.itse1908.murzaliev.repository.repoImpl.GradesRepoImpl;
 import kz.iitu.itse1908.murzaliev.repository.repoImpl.StudentRepoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,14 +20,14 @@ public class StudentService {
 
     private DisciplineService disciplineService;
 
-    private GradesService gradesService;
+    private GradesRepoImpl gradesRepo;
 
     @Autowired
-    public StudentService(UserService userService, StudentRepoImpl studentRepo, DisciplineService disciplineService, GradesService gradesService) {
+    public StudentService(UserService userService, StudentRepoImpl studentRepo, DisciplineService disciplineService, GradesRepoImpl gradesRepo) {
         this.userService = userService;
         this.studentRepo = studentRepo;
         this.disciplineService = disciplineService;
-        this.gradesService = gradesService;
+        this.gradesRepo = gradesRepo;
     }
 
     @Autowired
@@ -111,7 +112,7 @@ public class StudentService {
         List<Student> studentList = studentRepo.findAll();
         Optional<Student> optionalStudent = studentList.stream().filter(d -> d.getStudentId() == studentId).findFirst();
         if (optionalStudent.isPresent()) {
-            List<Grades> gradesList = gradesService.getGradesList(studentId);
+            List<Grades> gradesList = gradesRepo.findByStudent(studentId);
 
             for (int i=0; i < gradesList.size(); i++) {
                 gpa += gradesList.get(i).getFinalGrade();

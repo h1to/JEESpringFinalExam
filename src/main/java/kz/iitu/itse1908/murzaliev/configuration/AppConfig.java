@@ -26,7 +26,7 @@ public class AppConfig {
         dataSourceBuilder.driverClassName("org.postgresql.Driver");
         dataSourceBuilder.url("jdbc:postgresql://localhost:5432/variant3_murzaliev");
         dataSourceBuilder.username("postgres");
-        dataSourceBuilder.password("nt[ybrfrkjybhjdfybz");
+        dataSourceBuilder.password("Valardehayeris12");
         return dataSourceBuilder.build();
     }
 

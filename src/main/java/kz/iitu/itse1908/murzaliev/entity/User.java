@@ -69,4 +69,12 @@ public class User {
     public enum Provider {
         LOCAL, GOOGLE
     }
+
+    public User(Long userId, @NonNull Role role, @NonNull String email, @NonNull String password, @NonNull Boolean block) {
+        this.userId = userId;
+        this.role = role;
+        this.email = email;
+        this.password = password;
+        this.block = block;
+    }
 }
